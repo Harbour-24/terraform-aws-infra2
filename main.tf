@@ -1,21 +1,21 @@
 terraform {
-	required_providers {
-	   aws = {
-	       source = "hashicorp/aws"
-	       version = "~> 5.41.0"
-	   }
-	}
-	cloud {
-	  organization = "aws-infra2026"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.41.0"
+    }
+  }
+  cloud {
+    organization = "aws-infra2026"
 
-	  workspaces {
-	    name = "aws-infra"
-	  }
-	}
+    workspaces {
+      name = "aws-infra"
+    }
+  }
 }
 
 provider "aws" {
-	region = "ap-northeast-1"
+  region = "ap-northeast-1"
 }
 
 resource "aws_vpc" "main" {
@@ -34,6 +34,7 @@ resource "aws_instance" "test_server" {
   subnet_id     = aws_subnet.main.id
 
   tags = {
-    Name = "TestInstance"
+    Name      = "TestInstance",
+    ManagedBy = "HCP Terraform"
   }
 }
